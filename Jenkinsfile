@@ -24,7 +24,7 @@ pipeline{
         stage('Deploy'){
             steps{
                 echo 'Deploying...'
-                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v2/') {
+                withDockerRegistry(credentialsId: 'nanglt', url: 'https://index.docker.io/v1/') {
                     script{
                         app = docker.build("nanglt/cicd-nest")
                         app.push()
