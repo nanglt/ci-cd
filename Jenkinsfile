@@ -24,7 +24,7 @@ pipeline{
         stage('Deploy'){
             steps{
                 sshagent (credentials: ['deploy-dev']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -l root 172.20.0.1 uname -a touch text.txt'
+                    sh 'ssh -o StrictHostKeyChecking=no -l root 192.168.10.159 uname -a touch text.txt'
                 }
             }
         }
