@@ -1,9 +1,19 @@
 pipeline{
     agent any
+    environment{
+        DB_URL = 'mysql+pymysql://usr:pwd@host:/db'
+    }
     stages {
         stage('Build') {
             steps {
-                echo 'Building....'
+                echo 'Building the app....'
+                sh '''
+                    echo "This block contains multi-line steps"
+                '''
+                sh '''
+                    echo "Database url is: ${DB_URL}"
+                    env
+                '''
             }
         }
         stage('Test'){
