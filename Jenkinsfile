@@ -5,16 +5,6 @@ pipeline{
     }
     stages {
         stage('Build') {
-            steps {
-                echo 'Building the app....'
-                sh '''
-                    echo "This block contains multi-line steps"
-                '''
-                sh '''
-                    echo "Database url is: ${DB_URL}"
-                    env
-                '''
-            }
             steps{
                 echo 'Deploying...'
                 withDockerRegistry(credentialsId: 'nanglt', url: 'https://index.docker.io/v1/') {
