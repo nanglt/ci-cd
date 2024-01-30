@@ -15,13 +15,6 @@ pipeline{
                     env
                 '''
             }
-        }
-        stage('Test'){
-            steps {
-                echo 'Testing...'
-            }
-        }
-        stage('Deploy'){
             steps{
                 echo 'Deploying...'
                 withDockerRegistry(credentialsId: 'nanglt', url: 'https://index.docker.io/v1/') {
@@ -30,6 +23,18 @@ pipeline{
                         app.push()
                         app.push('latest')
                     }
+                }
+            }
+        }
+        stage('Test'){
+            steps {
+                echo 'Testing...'
+            }
+        }
+        stage('Deploy'){
+            steps{
+                sshagent (credentials: ['deploy-dev']) {
+                    sh 'ssh -o StrictHostKeyChecking=no -l root 172.20.0.1 uname -a touch text.txt'
                 }
             }
         }
