@@ -5,9 +5,6 @@ pipeline{
     }
     stages {
         stage('Build') {
-            agent{
-
-            }
             steps {
                 echo 'Building the app....'
                 sh '''
@@ -27,7 +24,7 @@ pipeline{
         stage('Deploy'){
             steps{
                 echo 'Deploying...'
-                docker.withRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v2/') {
+                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v2/') {
                     app = docker.build("nanglt/cicd-nest")
                     app.push()
                     app.push('latest')
