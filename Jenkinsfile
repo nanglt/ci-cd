@@ -3,6 +3,9 @@ pipeline{
     environment{
         DB_URL = 'mysql+pymysql://usr:pwd@host:/db'
     }
+    tools{
+
+    }
     stages {
         stage('Build') {
             steps {
@@ -24,6 +27,16 @@ pipeline{
                 echo 'Deploy...'
                 sshagent(['cid']) {
                     sh 'ssh ubuntu@cid.sonatgame.com touch test.txt'
+                }
+            }
+        }
+        stage ('Sonarqube'){
+            steps{
+                withSonarQubeEnv('sonar') {
+                    def scannerHome = tool 'SonarScanner';
+                        withSonarQubeEnv() {
+                          sh "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
             }
         }
