@@ -24,7 +24,7 @@ pipeline{
                 echo 'Deploy...'
                 sshagent(['cid']) {
                     sh 'ssh ubuntu@cid.sonatgame.com'
-                    sh 'touch test.txt'
+                    sh 'cd /workspace touch test.txt'
                 }
             }
         }
