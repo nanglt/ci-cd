@@ -30,7 +30,7 @@ pipeline{
         stage ('Sonarqube'){
             steps{
                 withSonarQubeEnv('sonar') {
-                    sh "mvn clean package sonar:sonar"
+                    sh "/bin/sonar-scanner"
                 }
             }
         }
