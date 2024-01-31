@@ -7,13 +7,6 @@ pipeline{
         stage('Build') {
             steps {
                 echo 'Deploying...'
-                withDockerRegistry(credentialsId: 'nanglt', url: 'https://index.docker.io/v1/') {
-                    script{
-                        app = docker.build("nanglt/cicd-nest")
-                        app.push()
-                        app.push('latest')
-                    }
-                }
             }
         }
         stage('Test'){
