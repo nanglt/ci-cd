@@ -1,9 +1,5 @@
 pipeline{
     agent any
-    tools{
-        jdk 'jdk11'
-        maven 'maven3'
-    }
     environment{
         DB_URL = 'mysql+pymysql://usr:pwd@host:/db'
         SONAR_SCANNER = tool 'sonar-scanner';
