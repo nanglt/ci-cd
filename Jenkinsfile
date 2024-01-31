@@ -30,7 +30,9 @@ pipeline{
         stage ('Sonarqube'){
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonarqube2') {
-                    sh "sonar-scanner/bin/sonar-scanner"
+                    withMaven(maven:'Maven 3.5') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
                 }
             }
         }
