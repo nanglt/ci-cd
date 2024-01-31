@@ -1,8 +1,12 @@
 pipeline{
     agent any
+    tools{
+        jdk 'jdk11'
+        maven 'maven3'
+    }
     environment{
         DB_URL = 'mysql+pymysql://usr:pwd@host:/db'
-        SONAR_SCANNER = tool 'sonarqube2';
+        SONAR_SCANNER = tool 'sonar-scanner';
     }
     stages {
         stage('Build') {
@@ -31,7 +35,7 @@ pipeline{
         stage ('Sonarqube'){
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonarqube2') {
-                    sh "${SONAR_SCANNER}/bin/sonar-scanner"
+                    sh "$SONAR_SCANNER/bin/sonar-scanner"
                 }
             }
         }
