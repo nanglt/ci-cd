@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment{
         DB_URL = 'mysql+pymysql://usr:pwd@host:/db'
-        SONAR_SCANNER = tool 'sonar-scanner';
+        SONAR_SCANNER = tool 'sonarqube2';
     }
     stages {
         stage('Build') {
