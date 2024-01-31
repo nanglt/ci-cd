@@ -2,6 +2,7 @@ pipeline{
     agent any
     environment{
         DB_URL = 'mysql+pymysql://usr:pwd@host:/db'
+        SONAR_SCANNER = tool 'SonarScanner';
     }
     stages {
         stage('Build') {
@@ -29,10 +30,9 @@ pipeline{
         }
         stage ('Sonarqube'){
             steps{
-                withSonarQubeEnv('sonar') {
-                    def scannerHome = tool 'SonarScanner';
-                        withSonarQubeEnv() {
-                          sh "${scannerHome}/bin/sonar-scanner"
+                withSonarQubeEnv(credentialsId: 'sonar') {
+                    withSonarQubeEnv() {
+                      sh "${SONAR_SCANNER}/bin/sonar-scanner"
                     }
                 }
             }
