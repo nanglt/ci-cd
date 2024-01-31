@@ -23,12 +23,7 @@ pipeline{
         }
         stage('Deploy'){
             steps {
-                sshagent (credentials: ['deploy-dev']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -l root 192.168.10.159 uname -a touch text.txt'
-                    sh 'docker tag scretagent:v1 localhost:5000/secretagent:v1'
-                    sh 'docker run -d --network='host' -p 3050:3050 --name secret_agent localhost:5000/secretagent:v1'
-                    sh 'echo 'Secret Agent up and running on port 3050''
-                }
+                echo 'Deploy'
             }
         }
     }
