@@ -3,9 +3,6 @@ pipeline{
     environment{
         DB_URL = 'mysql+pymysql://usr:pwd@host:/db'
     }
-    tools{
-
-    }
     stages {
         stage('Build') {
             steps {
