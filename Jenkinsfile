@@ -29,10 +29,8 @@ pipeline{
         }
         stage ('Sonarqube'){
             steps{
-                withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonarqube2') {
-                    withMaven(maven:'Maven 3.5') {
-                        sh 'mvn clean package sonar:sonar'
-                    }
+                withSonarQubeEnv('sonarqube2') {
+                    sh 'mvn clean package sonar:sonar'
                 }
             }
         }
