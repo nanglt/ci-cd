@@ -30,7 +30,7 @@ pipeline{
         stage ('Sonarqube'){
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonarqube2') {
-                    sh "sonarqube2/bin/sonar-scanner"
+                    sh "sonar-scanner/bin/sonar-scanner"
                 }
             }
         }
