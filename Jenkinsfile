@@ -22,6 +22,10 @@ pipeline{
         stage('Deploy'){
             steps {
                 echo 'Deploy...'
+                sshagent(['cid']) {
+                    sh 'ssh -o StrictHostKeyChecking=no -l ubuntu cid.sonatgame.com uname -a'
+                    sh 'touch test.txt'
+                }
             }
         }
     }
