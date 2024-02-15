@@ -20,9 +20,6 @@ pipeline{
             }
         }
         stage ('Sonarqube'){
-            environment{
-                scannerHome = tool 'SonarQubeScanner'
-            }
             steps{
                 withSonarQubeEnv(credentialsId: 'sonarqube-server-admin-token', installationName: 'Sonarqube Server Connection') {
                      sh 'mvn clean package sonar:sonar'
