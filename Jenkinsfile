@@ -1,15 +1,11 @@
 pipeline{
-    agent {
-        docker{
-            image 'node:20.11.0-alpine3.19'
-            args '-p 3000:3000'
-        }
-    }
+    agent any
     environment{
         DB_URL = 'mysql+pymysql://usr:pwd@host:/db'
     }
     tools{
         maven '3.9.6'
+        nodejs '21.6.2'
     }
     stages {
 
@@ -23,9 +19,7 @@ pipeline{
                 scannerHome = tool 'SonarQubeScanner'
             }
             steps{
-                withSonarQubeEnv(credentialsId: 'sonar_test2', installationName: 'Sonarqube Server Connection') {
-                     sh "${scannerHome}/bin/sonar-scanner"
-                }
+                nodejs()
             }
         }
         stage('Build') {
