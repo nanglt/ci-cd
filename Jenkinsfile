@@ -5,7 +5,7 @@ pipeline{
     }
     tools{
         maven '3.9.6'
-        nodejs '21.6.2'
+        nodejs '15'
     }
     stages {
 
