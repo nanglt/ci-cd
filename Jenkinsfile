@@ -19,7 +19,9 @@ pipeline{
                 scannerHome = tool 'SonarQubeScanner'
             }
             steps{
-                nodejs()
+                withSonarQubeEnv(credentialsId: 'sonar_test2', installationName: 'Sonarqube Server Connection') {
+                     sh "${scannerHome}/bin/sonar-scanner"
+                }
             }
         }
         stage('Build') {
