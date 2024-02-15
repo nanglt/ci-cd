@@ -20,20 +20,20 @@ pipeline{
             }
         }
         stage ('Sonarqube'){
+            environment{
+                scannerHome = tool 'SonarQubeScanner'
+            }
             steps{
                 withSonarQubeEnv(credentialsId: 'sonarqube-server-admin-token', installationName: 'Sonarqube Server Connection') {
-                    sh "./gradlew sonarqube"
+                    sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
         stage('Deploy'){
-            environment{
-                scannerHome = tool 'SonarQubeScanner'
-            }
             steps {
                 echo 'Deploy...'
                 sshagent(['cid']) {
-                    sh ''${scannerHome}/bin/sonar-scanner'
+                    sh 'ssh ubuntu@cid.sonatgame.com touch test.txt'
                 }
             }
         }
