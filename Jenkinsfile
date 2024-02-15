@@ -14,14 +14,14 @@ pipeline{
             }
         }
         stage ('Sonarqube'){
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+            }
             agent {
                 docker {
                     image 'node:lts-buster-slim'
                     reuseNode true
                 }
-            }
-            environment {
-                scannerHome = tool 'SonarQubeScanner'
             }
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar_test2', installationName: 'Sonarqube Server Connection') {
