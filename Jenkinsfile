@@ -25,7 +25,7 @@ pipeline{
             }
             steps{
                 withSonarQubeEnv(credentialsId: 'sonarqube-server-admin-token', installationName: 'Sonarqube Server Connection') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                     sh 'mvn clean package sonar:sonar'
                 }
             }
         }
