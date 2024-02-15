@@ -14,6 +14,12 @@ pipeline{
             }
         }
         stage ('Sonarqube'){
+            agent {
+                docker {
+                    image 'node:lts-buster-slim'
+                    reuseNode true
+                }
+            }
             environment {
                 scannerHome = tool 'SonarQubeScanner'
             }
