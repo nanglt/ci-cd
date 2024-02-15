@@ -7,6 +7,12 @@ export class AppService {
   }
 
   getList() {
+    const a = 0;
+    const b = 0;
+    const c = a + b;
+    return 'Hello';
+  }
+  getList2() {
     return 'Hello';
   }
 }
