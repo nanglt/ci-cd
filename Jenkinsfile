@@ -19,6 +19,13 @@ pipeline{
                 echo 'Testing...'
             }
         }
+        stage ('Sonarqube'){
+            steps{
+                withSonarQubeEnv(credentialsId: 'sonarqube-server-admin-token', installationName: 'Sonarqube Server Connection') {
+                    sh "./gradlew sonarqube"
+                }
+            }
+        }
         stage('Deploy'){
             steps {
                 echo 'Deploy...'
@@ -27,12 +34,6 @@ pipeline{
                 }
             }
         }
-        stage ('Sonarqube'){
-            steps{
-                withSonarQubeEnv(credentialsId: 'sonarqube-server-admin-token', installationName: 'Sonarqube Server Connection') {
-                    // some block
-                }
-            }
-        }
+
     }
 }
