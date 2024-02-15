@@ -1,6 +1,10 @@
 pipeline{
-    agent any
-    environment{
+    agent {
+        docker {
+            image 'node:20.11.0-alpine3.19'
+            args '-p 3000:3000'
+        }
+    }    environment{
         DB_URL = 'mysql+pymysql://usr:pwd@host:/db'
     }
     tools{
@@ -16,12 +20,6 @@ pipeline{
         stage ('Sonarqube'){
             environment {
                 scannerHome = tool 'SonarQubeScanner'
-            }
-            agent {
-                docker {
-                    image 'node:lts-buster-slim'
-                    reuseNode true
-                }
             }
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar_test2', installationName: 'Sonarqube Server Connection') {
