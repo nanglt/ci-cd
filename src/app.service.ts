@@ -10,7 +10,8 @@ export class AppService {
     const a = 0;
     const b = 0;
     const c = a + b;
-    return c == 0;
+    if(c == 0) return true
+    else return false;
   }
   getList2() {
     return 'Hello';
