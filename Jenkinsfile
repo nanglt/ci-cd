@@ -27,10 +27,13 @@ pipeline{
             }
         }
         stage('Deploy'){
+            environment{
+                scannerHome = tool 'SonarQubeScanner'
+            }
             steps {
                 echo 'Deploy...'
                 sshagent(['cid']) {
-                    sh 'ssh ubuntu@cid.sonatgame.com touch test.txt'
+                    sh ''${scannerHome}/bin/sonar-scanner'
                 }
             }
         }
