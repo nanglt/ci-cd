@@ -23,9 +23,12 @@ pipeline{
             }
         }
         stage ('Sonarqube'){
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+            }
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar_test2', installationName: 'Sonarqube Server Connection') {
-                     sh 'mvn clean package sonar:sonar'
+                     sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
