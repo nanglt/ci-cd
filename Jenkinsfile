@@ -24,8 +24,8 @@ pipeline{
         }
         stage ('Sonarqube'){
             steps{
-                withSonarQubeEnv(credentialsId: 'sonarqube-server-admin-token', installationName: 'Sonarqube Server Connection') {
-                     sh 'mvn clean package sonar:sonar'
+                withSonarQubeEnv('Sonarqube Server Connection') {
+                     sh 'mvn sonar:sonar -Dsonar.projectKey=jenkins-example -Dsonar.host.url=http://cid.sonatgame.com:9000 -Dsonar.login=34b4bec0425e8d5ee27cce937d037b1211b2a6cc'
                 }
             }
         }
