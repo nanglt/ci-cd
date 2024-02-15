@@ -29,8 +29,8 @@ pipeline{
         }
         stage ('Sonarqube'){
             steps{
-                withSonarQubeEnv('sonarqube2') {
-                    sh 'mvn clean package sonar:sonar'
+                withSonarQubeEnv(credentialsId: 'sonarqube-server-admin-token', installationName: 'Sonarqube Server Connection') {
+                    // some block
                 }
             }
         }
