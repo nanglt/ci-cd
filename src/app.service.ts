@@ -6,11 +6,11 @@ export class AppService {
     return 'Hello World!';
   }
 
-  getList() {
+  getList(): string {
     const a = 0;
     const b = 0;
     const c = a + b;
-    return 'Hello';
+    return c;
   }
   getList2() {
     return 'Hello';
