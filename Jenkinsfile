@@ -20,7 +20,7 @@ pipeline{
             }
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar_test2', installationName: 'Sonarqube Server Connection') {
-                     sh "${scannerHome}/bin/sonar-scanner"
+                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=jenkins-example -Dsonar.host.url=http://cid.sonatgame.com:9000 -Dsonar.login=sonar"
                 }
             }
         }
